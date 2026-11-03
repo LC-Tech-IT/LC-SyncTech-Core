@@ -2,7 +2,7 @@
 
 > **"Donde la tecnología no solo conecta: Sincroniza."**  
 > Compañía de ingeniería de software, telemetría e infraestructura cloud de misión crítica.  
-> Fundada y dirigida por el **Ing. Lee Darwin Castro Varón** (Especialista en Middleware y Arquitectura de Sistemas · Especialización en Machine Learning & Maestría en IA).
+> Fundada y dirigida por el **Ing. Lee Darwin Castro Varón** (Especialista en Middleware y Arquitectura de Sistemas · Formación de Posgrado en Machine Learning & Maestría en Inteligencia Artificial).
 
 ---
 
