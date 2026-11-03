@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LC SyncTech · Telemetría vial, auxilio médico e infraestructura digital · Colombia</title>
+  <meta name="description" content="LC SyncTech: Bike Tracker para motociclistas en convoy, LC Salva para auxilio médico de emergencia, software a la medida, cloud 24/7 y middleware. Colombia.">
+  <meta name="keywords" content="LC SyncTech, Bike Tracker, motociclistas, convoy, motoclub, LC Salva, ficha médica, NFC, software a la medida, middleware, cloud, Colombia">
+  <meta name="author" content="LC Synctech S.A.S.">
+  <meta name="theme-color" content="#0D0F14">
+  <link rel="canonical" href="https://lcsynctech.com/">
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:title" content="LC SyncTech · Donde la tecnología no solo conecta: Sincroniza.">
+  <meta property="og:description" content="Telemetría vial, auxilio médico de emergencia e infraestructura digital para empresas. Colombia.">
+  <meta property="og:url" content="https://lcsynctech.com/">
+  <meta property="og:image" content="https://lcsynctech.com/bike_tracker_cockpit.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@lcsynctech">
+
+  <!-- Favicon vectorial (monograma simplificado) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B0C0E'/%3E%3Cpath d='M10 10h6v38h14l3 6H10z' fill='none' stroke='%23C5A059' stroke-width='2.5'/%3E%3Cpath d='M51 20a18 18 0 1 0 0 24' fill='none' stroke='%23C5A059' stroke-width='3'/%3E%3Cpath d='M30 32h16' stroke='%23C5A059' stroke-width='2'/%3E%3Ccircle cx='48' cy='32' r='2' fill='%23C5A059'/%3E%3C/svg%3E">
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Datos estructurados para buscadores -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "LC SyncTech",
+    "legalName": "LC Synctech S.A.S.",
+    "url": "https://lcsynctech.com/",
+    "email": "contacto@lcsynctech.com",
+    "address": { "@type": "PostalAddress", "addressCountry": "CO" },
+    "sameAs": [
+      "https://www.facebook.com/LCSyncTech",
+      "https://www.instagram.com/lc_synctech",
+      "https://www.tiktok.com/@lc_synctech"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ================================================================
+       DEFINICIONES SVG: degradado champán y monograma oficial
+       ================================================================ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Oro champán / titanio cálido -->
+      <linearGradient id="oro-pulido" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#E4D3B4"/>
+        <stop offset=".3" stop-color="#C5A059"/>
+        <stop offset=".55" stop-color="#8A7040"/>
+        <stop offset=".8" stop-color="#D4BC96"/>
+        <stop offset="1" stop-color="#B08D4E"/>
+      </linearGradient>
+
+      <!-- Monograma LC entrelazado con pistas de circuito y nodos -->
+      <symbol id="lc-monograma" viewBox="0 0 120 100">
+        <g fill="none" stroke="url(#oro-pulido)" stroke-linejoin="miter" stroke-linecap="square">
+          <path d="M8 8 H20 V80 H40 L46 92 H8 Z" stroke-width="2.6"/>
+          <path d="M14 14 V86 H40" stroke-width="1.4"/>
+          <path d="M103.11 25.57 A38 38 0 1 0 103.11 74.43 L96.98 69.28 A30 30 0 1 1 96.98 30.72 Z" stroke-width="2.6"/>
+          <path d="M91.62 35.22 A23 23 0 1 0 91.62 64.78" stroke-width="1.4"/>
+          <path d="M54 44 H66 L72 38 H88" stroke-width="1.8"/>
+          <path d="M54 50 H96" stroke-width="1.8"/>
+          <path d="M54 56 H66 L72 62 H88" stroke-width="1.8"/>
+          <circle cx="91.2" cy="38" r="3.2" stroke-width="1.8"/>
+          <circle cx="99.2" cy="50" r="3.2" stroke-width="1.8"/>
+          <circle cx="91.2" cy="62" r="3.2" stroke-width="1.8"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- Rejilla editorial de fondo -->
+  <div class="rejilla" aria-hidden="true">
+    <div class="contenedor rejilla__cols"><span></span><span></span><span></span><span></span></div>
+  </div>
+
+  <!-- ================================================================
+       1. HEADER
+       ================================================================ -->
+  <header class="cabecera" id="cabecera">
+    <div class="contenedor cabecera__barra">
+      <a class="marca" href="#inicio" aria-label="LC SyncTech, volver al inicio">
+        <svg class="marca__monograma" viewBox="0 0 120 100" aria-hidden="true"><use href="#lc-monograma"/></svg>
+        <span class="marca__leyenda" aria-hidden="true"><i></i>SYNCTECH<i></i></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <ol class="nav__lista">
+          <li><a href="#ecosistema"><span class="nav__num">01</span>Ecosistema</a></li>
+          <li><a href="#productos"><span class="nav__num">02</span>Productos</a></li>
+          <li><a href="#servicios"><span class="nav__num">03</span>Servicios B2B</a></li>
+          <li><a href="#contacto"><span class="nav__num">04</span>Contacto</a></li>
+        </ol>
+        <a class="btn btn--oro nav__cta-movil" href="#contacto">Iniciar Sincronización</a>
+      </nav>
+
+      <a class="btn btn--oro cabecera__cta" href="#contacto">
+        <span class="btn__led" aria-hidden="true"></span>Iniciar Sincronización
+      </a>
+
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ================================================================
+         2. HERO
+         ================================================================ -->
+    <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+      <canvas class="hero__lienzo" id="lienzo-sync" aria-hidden="true"></canvas>
+      <div class="hero__velo" aria-hidden="true"></div>
+
+      <div class="contenedor hero__cuerpo">
+        <p class="insignia">
+          <span class="insignia__punto" aria-hidden="true"></span>
+          Ingeniería de Software &amp; Telemetría · Colombia
+        </p>
+
+        <h1 class="hero__titulo" id="hero-titulo">
+          <span class="linea">Donde la tecnología no solo conecta:</span>
+          <span class="linea hero__oro">Sincroniza.</span>
+        </h1>
+
+        <div class="hero__pie">
+          <p class="hero__texto">Plataformas de telemetría vial, auxilio médico de emergencia e infraestructura digital para empresas.</p>
+          <div class="hero__acciones">
+            <a class="btn btn--oro btn--grande" href="#productos">Explorar Productos Propios <span aria-hidden="true">→</span></a>
+            <a class="btn btn--linea btn--grande" href="#servicios">Cotizar Software &amp; Cloud</a>
+          </div>
+        </div>
+
+        <aside class="lectura" aria-label="Lectura de red en vivo">
+          <p class="lectura__titulo"><span class="led" aria-hidden="true"></span>Red de sincronización · en línea</p>
+          <dl class="lectura__datos">
+            <div><dt>Nodos activos</dt><dd id="lec-nodos">—</dd></div>
+            <div><dt>Paquetes en tránsito</dt><dd id="lec-paquetes">—</dd></div>
+            <div><dt>Hora · COL</dt><dd id="lec-hora">—</dd></div>
+            <div><dt>Zona</dt><dd>UTC−5</dd></div>
+          </dl>
+        </aside>
+      </div>
+
+    </section>
+
+    <!-- ================================================================
+         TICKER DE TELEMETRÍA
+         ================================================================ -->
+    <div class="ticker" role="marquee" aria-label="Métricas de telemetría">
+      <div class="ticker__pista">
+        <ul class="ticker__grupo">
+          <li><b>Uptime infraestructura</b> 99.98%</li>
+          <li>Cifrado end-to-end</li>
+          <li><b>Latencia telemetría</b> &lt; 200 ms</li>
+          <li><b>Despacho SOS</b> &lt; 10 s</li>
+          <li>Desde Colombia para el mundo</li>
+        </ul>
+        <ul class="ticker__grupo" aria-hidden="true">
+          <li><b>Uptime infraestructura</b> 99.98%</li>
+          <li>Cifrado end-to-end</li>
+          <li><b>Latencia telemetría</b> &lt; 200 ms</li>
+          <li><b>Despacho SOS</b> &lt; 10 s</li>
+          <li>Desde Colombia para el mundo</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         ECOSISTEMA
+         ================================================================ -->
+    <section class="seccion seccion--clara" id="ecosistema" aria-labelledby="eco-titulo">
+      <div class="contenedor">
+        <header class="seccion__cabeza revelar">
+          <p class="etiqueta"><span>01 /</span>Ecosistema</p>
+          <h2 class="seccion__titulo" id="eco-titulo">Cuatro capas.<br><em>Un solo pulso.</em></h2>
+        </header>
+
+        <ol class="indice revelar">
+          <li class="indice__item">
+            <span class="indice__num">01</span>
+            <h3>Telemetría vial</h3>
+            <p>Bike Tracker · convoy de motos en vivo.</p>
+          </li>
+          <li class="indice__item">
+            <span class="indice__num">02</span>
+            <h3>Auxilio médico</h3>
+            <p>LC Salva · ficha clínica en 3 segundos.</p>
+          </li>
+          <li class="indice__item">
+            <span class="indice__num">03</span>
+            <h3>Software a la medida</h3>
+            <p>Web, mobile y cloud-native.</p>
+          </li>
+          <li class="indice__item">
+            <span class="indice__num">04</span>
+            <h3>Cloud &amp; Middleware</h3>
+            <p>Operación 24/7 e integración de sistemas.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         3. PRODUCTOS PROPIOS
+         ================================================================ -->
+    <section class="seccion seccion--panel" id="productos" aria-labelledby="prod-titulo">
+      <div class="contenedor">
+        <header class="seccion__cabeza revelar">
+          <p class="etiqueta"><span>02 /</span>Productos propios</p>
+          <h2 class="seccion__titulo" id="prod-titulo">Hechos para<br><em>volver a casa.</em></h2>
+        </header>
+
+        <!-- MÓDULO 01 · BIKE TRACKER -->
+        <article class="producto revelar" id="bike-tracker" aria-labelledby="bt-nombre">
+          <figure class="producto__visual">
+            <div class="producto__marco">
+              <img class="producto__foto" src="bike_tracker_cockpit.jpg" width="1376" height="768" loading="lazy" decoding="async"
+                   alt="Vista del motociclista en carretera de montaña con el convoy al frente y la app Bike Tracker en el soporte del manillar: Yamaha MT-09 a 94 km/h con los botones de Parada Gasolina, Peligro en Vía, Reagrupación, Control Policial / Retén y SOS.">
+            </div>
+            <dl class="cifras">
+              <div><dt>&gt; 500 m</dt><dd>Alerta de escobero rezagado</dd></div>
+              <div><dt>80 km/h</dt><dd>HUD operable con guantes</dd></div>
+              <div><dt>30 · 15 · 5</dt><dd>Días de aviso SOAT y RTM</dd></div>
+              <div><dt>BT</dt><dd>Voz giro a giro al casco</dd></div>
+            </dl>
+          </figure>
+
+          <div class="producto__ficha">
+            <p class="producto__badge">Telemetría &amp; navegación en convoy · Motociclistas</p>
+            <h3 class="producto__nombre" id="bt-nombre">Bike Tracker</h3>
+            <p class="producto__lema">“Salimos juntos, rodamos juntos, volvemos todos juntos a casa.”</p>
+
+            <ul class="pilares">
+              <li>
+                <span class="pilares__icono" aria-hidden="true">📡</span>
+                <div><h4>Radar de Convoy en Vivo</h4><p>Distancia al líder en metros. Alerta si el escobero se rezaga más de 500 m, sin tocar WhatsApp.</p></div>
+              </li>
+              <li>
+                <span class="pilares__icono" aria-hidden="true">🏍️</span>
+                <div><h4>Cockpit HUD para Guantes</h4><p>Botones grandes, voz Bluetooth al intercomunicador y pantalla siempre activa (Screen Wake Lock).</p></div>
+              </li>
+              <li>
+                <span class="pilares__icono" aria-hidden="true">🛡️</span>
+                <div><h4>Garaje Digital Anti-Patios</h4><p>Avisos 30, 15 y 5 días antes de vencer SOAT y Tecnomecánica.</p></div>
+              </li>
+            </ul>
+
+            <p class="producto__nota">Evite la multa C35 de <b>$633.200 COP</b> y patios de <b>$950.000+ COP</b>.</p>
+
+            <a class="btn btn--oro btn--grande" href="https://biker-tracker.vercel.app" target="_blank" rel="noopener">
+              <span class="btn__led" aria-hidden="true"></span>Ver App en Vivo <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- MÓDULO 02 · LC SALVA -->
+        <article class="producto producto--inverso revelar" id="salva" aria-labelledby="sv-nombre">
+          <figure class="producto__visual" data-inclinar>
+            <div class="producto__marco">
+              <div class="vitrina__pieza" data-inclinar-objetivo>
+              <img src="salva_ecosystem_duo.jpg" width="1376" height="768" loading="lazy" decoding="async"
+                   alt="Estudio de lujo con los dos productos en pedestales iluminados: la pulsera Salva Band negra con QR y el smartwatch con la placa Salva Watch de acero deslizada en la correa.">
+              </div>
+            </div>
+            <dl class="cifras">
+              <div><dt>&lt; 3 s</dt><dd>Acceso a datos clínicos</dd></div>
+              <div><dt>0</dt><dd>Baterías en el hardware</dd></div>
+              <div><dt>&lt; 10 s</dt><dd>Despacho SOS Inmediato</dd></div>
+              <div><dt>5</dt><dd>Tutores en red SOS</dd></div>
+            </dl>
+            <a class="btn btn--oro btn--grande producto__cta" href="https://salva-salvaguarda.vercel.app" target="_blank" rel="noopener">
+              <span class="btn__led" aria-hidden="true"></span>Conocer Salva <span aria-hidden="true">→</span>
+            </a>
+          </figure>
+
+          <div class="producto__ficha">
+            <p class="producto__badge">Salvaguarda &amp; auxilio médico inmediato</p>
+            <h3 class="producto__nombre" id="sv-nombre">LC Salva</h3>
+            <p class="producto__lema">Datos clínicos vitales en menos de 3 segundos ante una emergencia.</p>
+
+            <ul class="pilares">
+              <li>
+                <span class="pilares__icono" aria-hidden="true">📿</span>
+                <div><h4>Hardware Pasivo sin Baterías</h4><p>QR + NFC legibles por cualquier transeúnte, policía o paramédico.</p></div>
+              </li>
+              <li>
+                <span class="pilares__icono" aria-hidden="true">📲</span>
+                <div><h4>Alerta Silenciosa WhatsApp</h4><p>Notificación satelital inmediata con ubicación GPS a tu red de hasta 5 tutores vía Meta WhatsApp Cloud API.</p></div>
+              </li>
+              <li>
+                <span class="pilares__icono" aria-hidden="true">⚖️</span>
+                <div><h4>Ficha Médica Pública Gratuita de por Vida</h4><p>Grupo sanguíneo, alergias, patologías y contactos SOS.</p></div>
+              </li>
+            </ul>
+
+            <ul class="hardware" aria-label="Hardware LC Salva">
+              <li data-inclinar>
+                <span class="hardware__marco hardware__marco--mostrador" data-inclinar-objetivo><img class="hardware__foto" src="salva_band.png" width="1600" height="1200" loading="lazy" decoding="async"
+                     alt="Render técnico de la placa de la pulsera Salva Band con QR, serial SALVA-B-T010 e isotipo Salva."></span>
+                <div><h4>Salva Band</h4><p>Silicona impermeable · 244 mm · QR láser · NFC NTAG 13.56 MHz</p></div>
+                <span class="hardware__precio">$59.000 <small>COP</small></span>
+              </li>
+              <li data-inclinar>
+                <span class="hardware__marco hardware__marco--mostrador" data-inclinar-objetivo><img class="hardware__foto" src="salva_watch.png" width="1600" height="1200" loading="lazy" decoding="async"
+                     alt="Render técnico del pasador Salva Watch en acero cepillado con QR y serial SALVA-W-T001, con variante en oro rosa."></span>
+                <div><h4>Salva Watch</h4><p>Placa de acero quirúrgico AISI 316L que se desliza en la correa · Apple Watch, Garmin, Galaxy</p></div>
+                <span class="hardware__precio">$45.000 <small>COP</small></span>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         4. EMPRESA · IDENTIDAD INSTITUCIONAL
+         ================================================================ -->
+    <section class="seccion" id="empresa" aria-labelledby="emp-titulo">
+      <div class="contenedor">
+        <header class="seccion__cabeza revelar">
+          <p class="etiqueta"><span>03 /</span>Empresa</p>
+          <h2 class="seccion__titulo" id="emp-titulo">Ingeniería colombiana.<br><em>Estándar global.</em></h2>
+        </header>
+
+        <div class="identidad revelar">
+          <article class="tarjeta-oro identidad__quienes">
+            <p class="tarjeta-oro__etiqueta">Quiénes somos &amp; liderazgo</p>
+            <p class="identidad__texto">LC SyncTech S.A.S. es una firma colombiana de ingeniería de software, telemetría e infraestructura cloud de misión crítica, fundada y liderada por el Ing. Lee Darwin Castro Varón (Especialista en Middleware y Arquitectura de Sistemas). Concebida como la evolución de Sourcing Tronics, la compañía combina el desarrollo de plataformas propietarias de salvaguarda y movilidad con servicios de consultoría avanzada para organizaciones que requieren disponibilidad 24/7.</p>
+            <p class="identidad__firma">
+              <b>Ing. Lee Darwin Castro Varón</b>
+              <span>Fundador &amp; Director · Middleware y Arquitectura de Sistemas</span>
+            </p>
+          </article>
+
+          <article class="tarjeta-oro">
+            <p class="tarjeta-oro__etiqueta">Misión</p>
+            <p>Diseñar, desarrollar y sincronizar soluciones tecnológicas donde el software, el hardware y la nube converjan para salvaguardar vidas, optimizar la movilidad y potenciar la escalabilidad de las organizaciones con la máxima ética de datos.</p>
+          </article>
+
+          <article class="tarjeta-oro">
+            <p class="tarjeta-oro__etiqueta">Visión 2030</p>
+            <p>Para 2030, ser reconocidos como el ecosistema tecnológico y de telemetría de mayor impacto y confiabilidad de Colombia y Latinoamérica; respaldando a millones de usuarios en su seguridad diaria y siendo el socio de infraestructura preferido por las empresas líderes.</p>
+          </article>
+        </div>
+
+        <h3 class="identidad__subtitulo revelar">Valores inquebrantables</h3>
+        <ol class="valores revelar">
+          <li class="tarjeta-oro">
+            <span class="valores__num">01</span>
+            <h4>Rigor Técnico y Permanencia</h4>
+            <p>Arquitecturas diseñadas y documentadas para operar con estabilidad durante décadas.</p>
+          </li>
+          <li class="tarjeta-oro">
+            <span class="valores__num">02</span>
+            <h4>Ética Human-First de Datos</h4>
+            <p>Los datos clínicos de emergencia son sagrados: la ficha médica pública de rescate es y será 100% gratuita de por vida.</p>
+          </li>
+          <li class="tarjeta-oro">
+            <span class="valores__num">03</span>
+            <h4>Sincronía en Tiempo Real</h4>
+            <p>Sistemas, dispositivos y personas conectados en milisegundos.</p>
+          </li>
+          <li class="tarjeta-oro">
+            <span class="valores__num">04</span>
+            <h4>Soberanía y Compromiso Local</h4>
+            <p>Ingeniería colombiana de estándar global, con respaldo activo al talento y al deporte nacional.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         5. SERVICIOS B2B & INFRAESTRUCTURA
+         ================================================================ -->
+    <section class="seccion seccion--panel" id="servicios" aria-labelledby="serv-titulo">
+      <div class="contenedor">
+        <header class="seccion__cabeza revelar">
+          <p class="etiqueta"><span>04 /</span>Servicios B2B &amp; Infraestructura</p>
+          <h2 class="seccion__titulo" id="serv-titulo">Construir. Operar.<br><em>Integrar.</em></h2>
+        </header>
+
+        <ol class="servicios revelar">
+          <li class="servicio">
+            <span class="servicio__ref">01 /</span>
+            <h3>Software Factory a la Medida</h3>
+            <p>Web, mobile y arquitecturas cloud-native.</p>
+            <ul class="servicio__stack"><li>TypeScript</li><li>Node.js</li><li>Python</li><li>Kotlin</li><li>Swift</li></ul>
+            <a href="#contacto" class="servicio__ir" data-servicio="app">Cotizar <span aria-hidden="true">→</span></a>
+          </li>
+          <li class="servicio">
+            <span class="servicio__ref">02 /</span>
+            <h3>Administración Cloud 24/7</h3>
+            <p>Monitoreo, respaldos y alta disponibilidad.</p>
+            <ul class="servicio__stack"><li>PostgreSQL</li><li>Docker</li><li>AWS</li><li>Cloudflare</li></ul>
+            <a href="#contacto" class="servicio__ir" data-servicio="cloud">Cotizar <span aria-hidden="true">→</span></a>
+          </li>
+          <li class="servicio">
+            <span class="servicio__ref">03 /</span>
+            <h3>Consultoría Middleware</h3>
+            <p>Integración de legados y mensajería distribuida.</p>
+            <ul class="servicio__stack"><li>JBoss</li><li>Apache</li><li>RabbitMQ</li><li>MQTT</li><li>APIs</li></ul>
+            <a href="#contacto" class="servicio__ir" data-servicio="middleware">Cotizar <span aria-hidden="true">→</span></a>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         5. CONTACTO / COTIZADOR B2B
+         ================================================================ -->
+    <section class="seccion contacto" id="contacto" aria-labelledby="con-titulo">
+      <div class="contenedor contacto__rejilla">
+        <div class="contacto__intro revelar">
+          <p class="etiqueta"><span>05 /</span>Contacto · Cotizador</p>
+          <h2 class="seccion__titulo" id="con-titulo">Iniciar<br><em>sincronización.</em></h2>
+          <p class="seccion__intro">Un ingeniero revisa cada solicitud y responde con un diagnóstico inicial.</p>
+
+          <ul class="canales">
+            <li>
+              <span class="canales__tipo">WhatsApp corporativo</span>
+              <!-- REEMPLAZAR: número oficial en formato internacional sin "+" (también en la constante WHATSAPP del script) -->
+              <a href="https://wa.me/573000000000" target="_blank" rel="noopener">+57 300 000 0000 <span aria-hidden="true">↗</span></a>
+            </li>
+            <li>
+              <span class="canales__tipo">Correo</span>
+              <a href="mailto:contacto@lcsynctech.com">contacto@lcsynctech.com</a>
+            </li>
+            <li>
+              <span class="canales__tipo">Cobertura</span>
+              <span>Colombia · proyectos remotos</span>
+            </li>
+          </ul>
+        </div>
+
+        <form class="cotizador revelar" id="cotizador" novalidate>
+          <fieldset class="cotizador__grupo">
+            <legend class="cotizador__leyenda"><span>A.</span>Servicio</legend>
+            <div class="selector" role="radiogroup">
+              <label class="selector__opcion">
+                <input type="radio" name="servicio" value="app" checked>
+                <span><b>01</b>Desarrollo de App</span>
+              </label>
+              <label class="selector__opcion">
+                <input type="radio" name="servicio" value="cloud">
+                <span><b>02</b>Auditoría Cloud</span>
+              </label>
+              <label class="selector__opcion">
+                <input type="radio" name="servicio" value="middleware">
+                <span><b>03</b>Integración Middleware</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="cotizador__grupo">
+            <legend class="cotizador__leyenda"><span>B.</span>Alcance</legend>
+
+            <div class="dinamico" data-panel="app">
+              <div class="checks">
+                <label class="check"><input type="checkbox" name="plataforma" value="Web"><span>Web</span></label>
+                <label class="check"><input type="checkbox" name="plataforma" value="iOS"><span>iOS</span></label>
+                <label class="check"><input type="checkbox" name="plataforma" value="Android"><span>Android</span></label>
+                <label class="check"><input type="checkbox" name="plataforma" value="Panel administrativo"><span>Panel admin</span></label>
+              </div>
+              <div class="campo">
+                <label for="etapa">Etapa</label>
+                <select id="etapa" name="etapa">
+                  <option>Idea / descubrimiento</option>
+                  <option>MVP por construir</option>
+                  <option>Producto en producción por escalar</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="dinamico" data-panel="cloud" hidden>
+              <div class="campos-dos">
+                <div class="campo">
+                  <label for="proveedor">Proveedor</label>
+                  <select id="proveedor" name="proveedor">
+                    <option>AWS</option><option>Cloudflare</option><option>Microsoft Azure</option>
+                    <option>Google Cloud</option><option>On-premise / Híbrido</option>
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="servidores">Servidores</label>
+                  <select id="servidores" name="servidores">
+                    <option>1 – 5</option><option>6 – 20</option><option>21 – 100</option><option>Más de 100</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="dinamico" data-panel="middleware" hidden>
+              <div class="campo">
+                <label for="sistemas">Sistemas a integrar</label>
+                <input id="sistemas" name="sistemas" type="text" placeholder="Ej. ERP en JBoss + app móvil">
+              </div>
+              <div class="checks">
+                <label class="check"><input type="checkbox" name="broker" value="RabbitMQ"><span>RabbitMQ</span></label>
+                <label class="check"><input type="checkbox" name="broker" value="Kafka"><span>Kafka</span></label>
+                <label class="check"><input type="checkbox" name="broker" value="MQTT"><span>MQTT</span></label>
+                <label class="check"><input type="checkbox" name="broker" value="Por definir"><span>Por definir</span></label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="cotizador__grupo">
+            <legend class="cotizador__leyenda"><span>C.</span>Contacto</legend>
+            <div class="campos-dos">
+              <div class="campo">
+                <label for="nombre">Nombre *</label>
+                <input id="nombre" name="nombre" type="text" autocomplete="name" required>
+              </div>
+              <div class="campo">
+                <label for="empresa">Empresa *</label>
+                <input id="empresa" name="empresa" type="text" autocomplete="organization" required>
+              </div>
+              <div class="campo">
+                <label for="correo">Correo *</label>
+                <input id="correo" name="correo" type="email" autocomplete="email" required>
+              </div>
+              <div class="campo">
+                <label for="horizonte">Inicio</label>
+                <select id="horizonte" name="horizonte">
+                  <option>Inmediato (0 – 30 días)</option>
+                  <option>Este trimestre</option>
+                  <option>Próximo semestre</option>
+                  <option>Exploratorio</option>
+                </select>
+              </div>
+            </div>
+            <div class="campo">
+              <label for="mensaje">Contexto</label>
+              <textarea id="mensaje" name="mensaje" rows="3" placeholder="¿Qué problema necesita resolver?"></textarea>
+            </div>
+            <label class="check check--legal">
+              <input type="checkbox" name="habeas" required>
+              <span>Autorizo el tratamiento de mis datos según la <a href="#politica-datos" data-abrir-modal="modal-datos">Política de Tratamiento de Datos</a> (Ley 1581 de 2012). *</span>
+            </label>
+          </fieldset>
+
+          <div class="cotizador__acciones">
+            <button class="btn btn--oro btn--grande" type="submit" data-canal="whatsapp">
+              <span class="btn__led" aria-hidden="true"></span>Enviar por WhatsApp
+            </button>
+            <button class="btn btn--linea btn--grande" type="submit" data-canal="correo">Enviar por correo</button>
+          </div>
+          <p class="cotizador__estado" id="cotizador-estado" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
+  <footer class="pie">
+    <div class="contenedor">
+      <div class="pie__marca">
+        <svg class="pie__logo" viewBox="0 0 240 150" role="img" aria-label="LC SyncTech">
+          <use href="#lc-monograma" x="60" y="0" width="120" height="100"/>
+          <line x1="22" y1="131" x2="58" y2="131" stroke="url(#oro-pulido)" stroke-width="1"/>
+          <text x="120" y="136" text-anchor="middle" class="pie__leyenda">SYNCTECH</text>
+          <line x1="182" y1="131" x2="218" y2="131" stroke="url(#oro-pulido)" stroke-width="1"/>
+        </svg>
+        <p class="pie__lema">Donde la tecnología no solo conecta: Sincroniza.</p>
+      </div>
+
+      <div class="pie__columnas">
+        <div>
+          <h2 class="pie__titulo">Razón social</h2>
+          <p>LC Synctech S.A.S. · Colombia</p>
+          <!-- REEMPLAZAR: NIT oficial de la sociedad -->
+          <p>NIT 900.000.000-0</p>
+        </div>
+        <div>
+          <h2 class="pie__titulo">Productos</h2>
+          <ul>
+            <li><a href="https://biker-tracker.vercel.app" target="_blank" rel="noopener">Bike Tracker <span aria-hidden="true">↗</span></a></li>
+            <li><a href="#salva">LC Salva</a></li>
+            <li><a href="#servicios">Servicios B2B</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="pie__titulo">Legal</h2>
+          <ul>
+            <li><a href="#politica-datos" data-abrir-modal="modal-datos">Tratamiento de datos</a></li>
+            <li><a href="#">Términos y condiciones</a></li>
+            <li><a href="#">Política de cookies</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="pie__titulo">Redes · @lc_synctech</h2>
+          <ul>
+            <li><a href="https://www.facebook.com/LCSyncTech" target="_blank" rel="noopener">Facebook <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.instagram.com/lc_synctech" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.tiktok.com/@lc_synctech" target="_blank" rel="noopener">TikTok <span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pie__base">
+        <p>© <span id="anio">2026</span> LC Synctech S.A.S. Todos los derechos reservados.</p>
+        <p>Diseñado y desarrollado en Colombia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================================
+       MODAL LEGAL · POLÍTICA DE TRATAMIENTO DE DATOS (LEY 1581 DE 2012)
+       ================================================================ -->
+  <dialog class="modal-legal" id="modal-datos" aria-labelledby="modal-datos-titulo">
+    <div class="modal-legal__cabeza">
+      <p class="etiqueta"><span>Ley 1581 / 2012</span>Hábeas Data</p>
+      <button class="modal-legal__cerrar" type="button" data-cerrar-modal aria-label="Cerrar política de tratamiento de datos">×</button>
+    </div>
+    <div class="modal-legal__cuerpo">
+      <h2 id="modal-datos-titulo">Política de Tratamiento de Datos Personales · Hábeas Data</h2>
+
+      <h3>1. Marco legal</h3>
+      <p>Esta política da cumplimiento a la Ley Estatutaria 1581 de 2012 y al Decreto 1377 de 2013 (compilado en el Decreto 1074 de 2015) de la República de Colombia.</p>
+
+      <h3>2. Responsable del tratamiento</h3>
+      <p><b>LC SyncTech S.A.S.</b> · Representante legal: Lee Darwin Castro Varón · Correo: <a href="mailto:contacto@lcsynctech.com">contacto@lcsynctech.com</a> · Colombia.</p>
+
+      <h3>3. Finalidades específicas</h3>
+      <ul>
+        <li><b>LC Salva:</b> consulta exclusiva de datos clínicos de rescate ante emergencias médicas y despacho de alertas satelitales vía WhatsApp Cloud API a los tutores autorizados por el titular.</li>
+        <li><b>Bike Tracker:</b> procesamiento de coordenadas GPS en tiempo real para navegación en convoy y alertas preventivas de vencimiento de SOAT y RTM.</li>
+        <li><b>Clientes B2B:</b> gestión comercial, cotización y soporte bajo estricta confidencialidad.</li>
+      </ul>
+
+      <h3>4. Datos sensibles</h3>
+      <p>Los datos de salud de la ficha LC Salva son datos sensibles. Su suministro es facultativo y solo se tratan con autorización previa, expresa e informada del titular (o de su representante legal en el caso de menores de edad), exclusivamente para la finalidad de rescate descrita.</p>
+
+      <h3>5. Seguridad y privacidad</h3>
+      <p>Cifrado en reposo y en tránsito (TLS 1.3), bases de datos PostgreSQL con seguridad a nivel de fila (RLS) y acceso restringido por roles. <b>Cero comercialización o venta de datos a terceros con fines publicitarios.</b></p>
+
+      <h3>6. Derechos del titular</h3>
+      <p>Conforme al artículo 8 de la Ley 1581, usted puede conocer, actualizar y rectificar sus datos; solicitar prueba de la autorización otorgada; ser informado sobre el uso dado a sus datos; revocar la autorización y solicitar la supresión de sus datos; acceder gratuitamente a ellos y presentar quejas ante la Superintendencia de Industria y Comercio (SIC). Estos derechos (conocidos también como ARCO: acceso, rectificación, cancelación y oposición) se ejercen escribiendo a <a href="mailto:contacto@lcsynctech.com">contacto@lcsynctech.com</a>.</p>
+
+      <h3>7. Consultas y reclamos</h3>
+      <p>Las consultas se atienden en un máximo de diez (10) días hábiles y los reclamos en un máximo de quince (15) días hábiles, contados desde su recibo, según los artículos 14 y 15 de la Ley 1581 de 2012.</p>
+
+      <p class="modal-legal__vigencia">Vigente desde noviembre de 2026.</p>
+    </div>
+  </dialog>
+
+  <!-- Lienzo interactivo del hero -->  <script src="canvas-sync.js" defer></script>
+
+  <!-- ================================================================
+       INTERFAZ: navegación, lectura en vivo y cotizador
+       ================================================================ -->
+  <script>
+  (() => {
+    'use strict';
+
+    // REEMPLAZAR: número de WhatsApp corporativo (código de país + número, sin "+")
+    const WHATSAPP = '573000000000';
+    const CORREO = 'contacto@lcsynctech.com';
+    const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- Año del copyright ---------- */
+    document.getElementById('anio').textContent = new Date().getFullYear();
+
+    /* ---------- Cabecera al hacer scroll ---------- */
+    const cabecera = document.getElementById('cabecera');
+    const marcarCabecera = () => cabecera.classList.toggle('es-desplazada', window.scrollY > 24);
+    marcarCabecera();
+    window.addEventListener('scroll', marcarCabecera, { passive: true });
+
+    /* ---------- Menú móvil ---------- */
+    const menuBtn = document.getElementById('menu-btn');
+    const nav = document.getElementById('nav');
+    const cerrarMenu = () => {
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'Abrir menú');
+      document.body.classList.remove('menu-abierto');
+    };
+    menuBtn.addEventListener('click', () => {
+      if (menuBtn.getAttribute('aria-expanded') === 'true') { cerrarMenu(); return; }
+      menuBtn.setAttribute('aria-expanded', 'true');
+      menuBtn.setAttribute('aria-label', 'Cerrar menú');
+      document.body.classList.add('menu-abierto');
+    });
+    nav.addEventListener('click', (e) => { if (e.target.closest('a')) cerrarMenu(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrarMenu(); });
+
+    /* ---------- Revelado progresivo ---------- */
+    const revelables = document.querySelectorAll('.revelar');
+    if ('IntersectionObserver' in window && !reducirMovimiento) {
+      const io = new IntersectionObserver((entradas) => {
+        entradas.forEach((en) => {
+          if (en.isIntersecting) { en.target.classList.add('es-visible'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      revelables.forEach((el) => io.observe(el));
+    } else {
+      revelables.forEach((el) => el.classList.add('es-visible'));
+    }
+
+    /* ---------- Lectura en vivo del hero ---------- */
+    const lecNodos = document.getElementById('lec-nodos');
+    const lecPaquetes = document.getElementById('lec-paquetes');
+    const lecHora = document.getElementById('lec-hora');
+    // Colombia no aplica horario de verano: UTC−5 fijo (Etc/GMT+5 en notación IANA)
+    const formatoHora = new Intl.DateTimeFormat('es-CO', {
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Etc/GMT+5'
+    });
+    const actualizarLectura = () => {
+      lecHora.textContent = formatoHora.format(new Date());
+      if (window.LCSync) {
+        lecNodos.textContent = String(window.LCSync.nodos).padStart(3, '0');
+        lecPaquetes.textContent = String(window.LCSync.paquetes).padStart(3, '0');
+      }
+    };
+    actualizarLectura();
+    setInterval(actualizarLectura, 1000);
+
+    /* ---------- Vitrina Salva: inclinación 3D con el cursor ---------- */
+    // Solo con mouse/trackpad (en táctil no hay "hover") y sin movimiento reducido.
+    const punteroFino = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (punteroFino && !reducirMovimiento) {
+      const MAX_GRADOS = 6;
+      document.querySelectorAll('[data-inclinar]').forEach((zona) => {
+        const objetivo = zona.querySelector('[data-inclinar-objetivo]');
+        if (!objetivo) return;
+        let cuadro = 0;
+        let ultimo = null;
+        const aplicar = () => {
+          cuadro = 0;
+          const r = zona.getBoundingClientRect();
+          const x = (ultimo.clientX - r.left) / r.width - 0.5;   // −0.5 … 0.5
+          const y = (ultimo.clientY - r.top) / r.height - 0.5;
+          objetivo.style.setProperty('--ry', (x * 2 * MAX_GRADOS).toFixed(2) + 'deg');
+          objetivo.style.setProperty('--rx', (-y * 2 * MAX_GRADOS).toFixed(2) + 'deg');
+        };
+        zona.addEventListener('pointermove', (e) => {
+          ultimo = e;
+          zona.classList.add('en-movimiento');
+          objetivo.classList.add('en-movimiento');
+          if (!cuadro) cuadro = requestAnimationFrame(aplicar);
+        });
+        zona.addEventListener('pointerleave', () => {
+          if (cuadro) { cancelAnimationFrame(cuadro); cuadro = 0; }
+          zona.classList.remove('en-movimiento');
+          objetivo.classList.remove('en-movimiento');
+          objetivo.style.setProperty('--rx', '0deg');
+          objetivo.style.setProperty('--ry', '0deg');
+        });
+      });
+    }
+
+    /* ---------- Modal legal: Política de Tratamiento de Datos (Ley 1581) ---------- */
+    document.querySelectorAll('[data-abrir-modal]').forEach((enlace) => {
+      const modal = document.getElementById(enlace.dataset.abrirModal);
+      if (!modal) return;
+      enlace.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (typeof modal.showModal === 'function') modal.showModal();
+        else modal.setAttribute('open', '');          // navegadores antiguos
+        document.body.classList.add('modal-abierto');
+        modal.querySelector('[data-cerrar-modal]').focus();
+      });
+    });
+    document.querySelectorAll('dialog.modal-legal').forEach((modal) => {
+      const cerrar = () => {
+        if (typeof modal.close === 'function') modal.close();
+        else { modal.removeAttribute('open'); document.body.classList.remove('modal-abierto'); }
+      };
+      modal.querySelector('[data-cerrar-modal]').addEventListener('click', cerrar);
+      // Clic en el fondo oscuro (fuera del panel) también cierra
+      modal.addEventListener('click', (e) => { if (e.target === modal) cerrar(); });
+      // Esc lo cierra de forma nativa; en ambos casos se libera el scroll
+      modal.addEventListener('close', () => document.body.classList.remove('modal-abierto'));
+    });
+    // Enlace directo: lcsynctech.com/#politica-datos abre la política
+    if (location.hash === '#politica-datos') {
+      const enlace = document.querySelector('[data-abrir-modal="modal-datos"]');
+      if (enlace) enlace.click();
+    }
+
+    /* ---------- Cotizador B2B ---------- */
+    const form = document.getElementById('cotizador');
+    const estadoForm = document.getElementById('cotizador-estado');
+    const paneles = form.querySelectorAll('.dinamico');
+    const nombresServicio = {
+      app: 'Desarrollo de App',
+      cloud: 'Auditoría Cloud',
+      middleware: 'Integración Middleware'
+    };
+
+    const mostrarPanel = (valor) => {
+      paneles.forEach((p) => { p.hidden = p.dataset.panel !== valor; });
+    };
+    form.addEventListener('change', (e) => {
+      if (e.target.name === 'servicio') mostrarPanel(e.target.value);
+    });
+
+    // Los enlaces "Cotizar" de cada servicio preseleccionan la opción
+    document.querySelectorAll('[data-servicio]').forEach((a) => {
+      a.addEventListener('click', () => {
+        const radio = form.querySelector(`input[name="servicio"][value="${a.dataset.servicio}"]`);
+        if (radio) { radio.checked = true; mostrarPanel(radio.value); }
+      });
+    });
+
+    const componerMensaje = () => {
+      const d = new FormData(form);
+      const servicio = d.get('servicio');
+      const lineas = ['Solicitud de sincronización · LC SyncTech', '', `Servicio: ${nombresServicio[servicio]}`];
+      if (servicio === 'app') {
+        const plat = d.getAll('plataforma');
+        lineas.push(`Plataformas: ${plat.length ? plat.join(', ') : 'Por definir'}`, `Etapa: ${d.get('etapa')}`);
+      } else if (servicio === 'cloud') {
+        lineas.push(`Proveedor: ${d.get('proveedor')}`, `Servidores: ${d.get('servidores')}`);
+      } else {
+        if (d.get('sistemas')) lineas.push(`Sistemas: ${d.get('sistemas')}`);
+        const br = d.getAll('broker');
+        lineas.push(`Broker: ${br.length ? br.join(', ') : 'Por definir'}`);
+      }
+      lineas.push(
+        `Inicio: ${d.get('horizonte')}`, '',
+        `Nombre: ${d.get('nombre')}`,
+        `Empresa: ${d.get('empresa')}`,
+        `Correo: ${d.get('correo')}`
+      );
+      if (d.get('mensaje')) lineas.push('', `Contexto: ${d.get('mensaje')}`);
+      return { texto: lineas.join('\n'), asunto: `Cotización · ${nombresServicio[servicio]} · ${d.get('empresa')}` };
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let primeroInvalido = null;
+      form.querySelectorAll('[required]').forEach((campo) => {
+        const valido = campo.checkValidity();
+        campo.closest('.campo, .check')?.classList.toggle('es-invalido', !valido);
+        if (!valido && !primeroInvalido) primeroInvalido = campo;
+      });
+      if (primeroInvalido) {
+        estadoForm.textContent = 'Complete los campos marcados.';
+        estadoForm.className = 'cotizador__estado es-error';
+        primeroInvalido.focus();
+        return;
+      }
+
+      const { texto, asunto } = componerMensaje();
+      const canal = e.submitter ? e.submitter.dataset.canal : 'whatsapp';
+      if (canal === 'correo') {
+        window.location.href = `mailto:${CORREO}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(texto)}`;
+        estadoForm.textContent = 'Abriendo su correo con la solicitud lista.';
+      } else {
+        window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+        estadoForm.textContent = 'Abriendo WhatsApp con la solicitud lista.';
+      }
+      estadoForm.className = 'cotizador__estado es-ok';
+    });
+
+    form.addEventListener('input', (e) => {
+      const caja = e.target.closest('.es-invalido');
+      if (caja && e.target.checkValidity()) caja.classList.remove('es-invalido');
+    });
+  })();
+  </script>
+</body>
+</html>

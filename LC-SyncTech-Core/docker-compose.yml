@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:15
+    container_name: lctech_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin_lctech
+      POSTGRES_PASSWORD: Tech_n4c3_2026
+      POSTGRES_DB: lctech_management
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: lctech_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: leecastro.tech@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

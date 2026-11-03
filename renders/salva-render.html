@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<title>Render de estudio · LC Salva</title>
+<!--
+  RENDER DE ESTUDIO VECTORIAL · LC SALVA
+  Fuente editable de las imágenes de producto del sitio.
+  Vistas (por ancla en la URL):
+    #compuesta  → 1376×768  → salva_hardware.png
+    #band       → 800×600   → salva_band.png
+    #watch      → 800×600   → salva_watch.png
+  Los QR son reales y codifican el serial grabado en cada pieza.
+  Para cambiar el contenido del QR (p. ej. la URL de la ficha), edite SERIAL_* abajo.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+  html, body { margin: 0; background: #0B0C0E; overflow: hidden; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<div id="escena"></div>
+<script>
+(() => {
+  'use strict';
+
+  const SERIAL_WATCH = 'SALVA-W-T001';
+  const SERIAL_BAND = 'SALVA-B-T010';
+
+  /* ---------- QR real como trazado vectorial ---------- */
+  function qr(texto) {
+    const q = qrcode(0, 'M');
+    q.addData(texto);
+    q.make();
+    const n = q.getModuleCount();
+    let d = '';
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (q.isDark(y, x)) d += `M${x} ${y}h1v1h-1z`;
+    return { n, d };
+  }
+  const qrW = qr(SERIAL_WATCH);
+  const qrB = qr(SERIAL_BAND);
+
+  // QR colocado en (x, y) con tamaño t
+  const qrEn = (q, x, y, t, color) =>
+    `<path d="${q.d}" fill="${color}" shape-rendering="crispEdges" transform="translate(${x} ${y}) scale(${t / q.n})"/>`;
+
+  /* ---------- Definiciones compartidas ---------- */
+  const defs = `
+  <defs>
+    <radialGradient id="ambiente" cx="50%" cy="0%" r="85%">
+      <stop offset="0" stop-color="#C5A059" stop-opacity=".16"/>
+      <stop offset=".55" stop-color="#C5A059" stop-opacity=".03"/>
+      <stop offset="1" stop-color="#C5A059" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="piso" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B0C0E"/>
+      <stop offset=".55" stop-color="#121418"/>
+      <stop offset="1" stop-color="#0B0C0E"/>
+    </linearGradient>
+
+    <!-- Acero quirúrgico cepillado -->
+    <linearGradient id="acero" x1="0" y1="0" x2="1" y2=".25">
+      <stop offset="0" stop-color="#7f838a"/>
+      <stop offset=".16" stop-color="#d6d8dc"/>
+      <stop offset=".34" stop-color="#a3a7ad"/>
+      <stop offset=".54" stop-color="#eef0f2"/>
+      <stop offset=".72" stop-color="#9da1a7"/>
+      <stop offset="1" stop-color="#c7c9cd"/>
+    </linearGradient>
+    <linearGradient id="acero-canto" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f5f6"/>
+      <stop offset=".45" stop-color="#8b8f95"/>
+      <stop offset="1" stop-color="#3d4045"/>
+    </linearGradient>
+
+    <!-- Acabado oro rosa (PVD) -->
+    <linearGradient id="rosa" x1="0" y1="0" x2="1" y2=".25">
+      <stop offset="0" stop-color="#a26c55"/>
+      <stop offset=".18" stop-color="#efc2ab"/>
+      <stop offset=".36" stop-color="#c08870"/>
+      <stop offset=".56" stop-color="#f8d7c6"/>
+      <stop offset=".74" stop-color="#b17660"/>
+      <stop offset="1" stop-color="#deae97"/>
+    </linearGradient>
+    <linearGradient id="rosa-canto" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbe2d5"/>
+      <stop offset=".45" stop-color="#a7705a"/>
+      <stop offset="1" stop-color="#4a2c22"/>
+    </linearGradient>
+
+    <!-- Silicona negra mate -->
+    <linearGradient id="silicona" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34353a"/>
+      <stop offset=".2" stop-color="#1d1e22"/>
+      <stop offset=".75" stop-color="#121316"/>
+      <stop offset="1" stop-color="#060607"/>
+    </linearGradient>
+    <linearGradient id="silicona-brillo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".16"/>
+      <stop offset=".35" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Textura de cepillado horizontal -->
+    <filter id="cepillado" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.003 0.55" numOctaves="2" seed="7"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0" intercept="0.22"/></feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+
+    <!-- Sombras de contacto sobre la superficie -->
+    <filter id="sombra" x="-30%" y="-30%" width="160%" height="190%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14"/>
+      <feOffset dy="20"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".6"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="grabado" x="-5%" y="-5%" width="110%" height="110%">
+      <feOffset dy="0.8"/>
+      <feGaussianBlur stdDeviation="0.25" result="b"/>
+      <feFlood flood-color="#fff" flood-opacity=".35"/>
+      <feComposite in2="b" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Isotipo Salva: corazón con pin de ubicación -->
+    <symbol id="isotipo" viewBox="0 0 100 100">
+      <path d="M50 90 C 20 70 6 54 6 35 C 6 20 17 9 31 9 C 40 9 46 14 50 21 C 54 14 60 9 69 9 C 83 9 94 20 94 35 C 94 54 80 70 50 90 Z"
+            fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round"/>
+      <path fill="currentColor" fill-rule="evenodd"
+            d="M50 64 C 42 53 36 46 36 38 A 14 14 0 0 1 64 38 C 64 46 58 53 50 64 Z M50 32.5 a 5.5 5.5 0 1 0 0.01 0 Z"/>
+      <path fill="currentColor" d="M20 60 Q 50 84 80 60 Q 50 73 20 60 Z"/>
+    </symbol>
+    <symbol id="nfc" viewBox="0 0 30 40">
+      <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+        <path d="M6 14 a 8 8 0 0 1 0 12"/>
+        <path d="M13 9 a 15 15 0 0 1 0 22"/>
+        <path d="M20 4 a 22 22 0 0 1 0 32"/>
+      </g>
+    </symbol>
+  </defs>`;
+
+  /* ---------- Pasador Salva Watch ---------- */
+  // Placa rectangular curva con canto biselado y grabado láser
+  function pasador(w, h, acabado) {
+    const cara = acabado === 'rosa' ? 'rosa' : 'acero';
+    const tinta = acabado === 'rosa' ? '#2b1c17' : '#1c1d20';
+    const r = h * 0.07, b = h * 0.045;
+    const fw = w - b * 2, fh = h - b * 2;
+    const t = fh * 0.5;                  // tamaño del QR (deja zona de silencio ≥ 4 módulos)
+    const qx = fw / 2 - t - fh * 0.12, qy = -fh / 2 + fh * 0.12;
+    return `
+    <g filter="url(#sombra)">
+      <rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="${r}" fill="url(#${cara}-canto)"/>
+      <rect x="${-fw / 2}" y="${-fh / 2}" width="${fw}" height="${fh}" rx="${r * 0.75}" fill="url(#${cara})"/>
+      <rect x="${-fw / 2}" y="${-fh / 2}" width="${fw}" height="${fh}" rx="${r * 0.75}" fill="#fff" filter="url(#cepillado)"/>
+      <rect x="${-fw / 2 + 1}" y="${-fh / 2 + 1}" width="${fw - 2}" height="${fh - 2}" rx="${r * 0.7}" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.2"/>
+      <g filter="url(#grabado)">
+        <text x="${-fw / 2 + fh * 0.13}" y="${fh * 0.07}" font-family="Inter, Arial, sans-serif" font-weight="600"
+              font-size="${fh * 0.2}" letter-spacing="-0.5" fill="${tinta}">Salva</text>
+        ${qrEn(qrW, qx, qy, t, tinta)}
+        <text x="${qx + t / 2}" y="${qy + t + fh * 0.13}" text-anchor="middle" font-family="Inter, Arial, sans-serif"
+              font-weight="600" font-size="${fh * 0.085}" letter-spacing="0.5" fill="${tinta}">${SERIAL_WATCH}</text>
+      </g>
+    </g>`;
+  }
+
+  /* ---------- Pulsera Salva Band (unidades: 1 mm = 10) ---------- */
+  // Anatomía tomada del plano técnico: 244 mm, placa central ensanchada,
+  // botón de cierre a la izquierda, 8 perforaciones y pasacorrea a la derecha.
+  function pulsera() {
+    const contorno = 'M65 -62 L700 -62 C770 -62 810 -92 880 -92 L1500 -92 C1570 -92 1610 -62 1680 -62 L2200 -62 C2235 -62 2245 -80 2285 -80 L2360 -80 A80 80 0 0 1 2440 0 A80 80 0 0 1 2360 80 L2285 80 C2245 80 2235 62 2200 62 L1680 62 C1610 62 1570 92 1500 92 L880 92 C810 92 770 62 700 62 L65 62 A62 62 0 0 1 65 -62 Z';
+    const agujeros = Array.from({ length: 8 }, (_, i) => 1720 + i * 58);
+    const blanco = '#ECE8E1';
+    return `
+    <mask id="perforaciones">
+      <path d="${contorno}" fill="#fff"/>
+      <rect x="2292" y="-42" width="96" height="84" rx="38" fill="#000"/>
+      ${agujeros.map((x) => `<circle cx="${x}" cy="0" r="17" fill="#000"/>`).join('')}
+    </mask>
+    <g filter="url(#sombra)">
+      <g mask="url(#perforaciones)">
+        <path d="${contorno}" fill="url(#silicona)"/>
+        <path d="${contorno}" fill="url(#silicona-brillo)"/>
+      </g>
+      <!-- Aros de las perforaciones -->
+      ${agujeros.map((x) => `<circle cx="${x}" cy="0" r="19" fill="none" stroke="#000" stroke-opacity=".6" stroke-width="4"/><circle cx="${x}" cy="1.5" r="20.5" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="1.5"/>`).join('')}
+      <rect x="2292" y="-42" width="96" height="84" rx="38" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="2"/>
+      <!-- Botón de cierre en acero -->
+      <circle cx="140" cy="0" r="44" fill="url(#acero-canto)"/>
+      <circle cx="140" cy="0" r="37" fill="url(#acero)"/>
+      <circle cx="140" cy="0" r="6" fill="#55585e"/>
+      <!-- Línea de canto superior -->
+      <path d="M70 -58 L700 -58 C770 -58 810 -88 880 -88 L1500 -88 C1570 -88 1610 -58 1680 -58 L2200 -58" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="2"/>
+      <!-- Grabado láser: QR, serial, isotipo y leyendas -->
+      <g fill="${blanco}" color="${blanco}">
+        ${qrEn(qrB, 915, -74, 118, blanco)}
+        <text x="974" y="72" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="500" font-size="19" letter-spacing="1">${SERIAL_BAND}</text>
+        <use href="#isotipo" x="1060" y="-62" width="104" height="104"/>
+        <text x="1178" y="12" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="72" letter-spacing="-1">Salva</text>
+        <use href="#nfc" x="1388" y="-34" width="24" height="32"/>
+        <text x="1180" y="44" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="14.5" letter-spacing="3.2">EMERGENCIA MÉDICA · QR &amp; NFC</text>
+        <text x="1180" y="66" font-family="Inter, Arial, sans-serif" font-weight="500" font-size="11.5" letter-spacing="2.6" fill-opacity=".75">TECNOLOGÍA DE SALVAGUARDA · LC TECH</text>
+      </g>
+    </g>`;
+  }
+
+  /* ---------- Anotaciones técnicas en champán ---------- */
+  const ORO = '#C5A059';
+  const etiqueta = (x, y, texto, ancla = 'start', tam = 11, op = 1) =>
+    `<text x="${x}" y="${y}" text-anchor="${ancla}" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="${tam}" letter-spacing="${tam * 0.22}" fill="${ORO}" fill-opacity="${op}">${texto}</text>`;
+  const llamada = (x1, y1, x2, y2, texto, ancla) => `
+    <circle cx="${x1}" cy="${y1}" r="3" fill="${ORO}"/>
+    <path d="M${x1} ${y1} L${x2} ${y2} H${x2 + (ancla === 'end' ? -60 : 60)}" fill="none" stroke="${ORO}" stroke-opacity=".7" stroke-width="1"/>
+    ${etiqueta(x2 + (ancla === 'end' ? -66 : 66), y2 + 4, texto, ancla === 'end' ? 'end' : 'start', 10.5)}`;
+
+  function fondo(w, h) {
+    return `
+    <rect width="${w}" height="${h}" fill="url(#piso)"/>
+    <rect width="${w}" height="${h}" fill="url(#ambiente)"/>`;
+  }
+
+  /* ---------- Vistas ---------- */
+  const vistas = {
+    compuesta() {
+      const W = 1376, H = 768;
+      return { W, H, svg: `
+      ${fondo(W, H)}
+      <!-- Pasadores: acero (frente) y oro rosa -->
+      <g transform="translate(905 262) rotate(5)">${pasador(318, 222, 'rosa')}</g>
+      <g transform="translate(560 270) rotate(-5)">${pasador(352, 246, 'acero')}</g>
+      <!-- Pulsera -->
+      <g transform="translate(92 560) rotate(-3) scale(0.49)">${pulsera()}</g>
+      <!-- Cotas -->
+      <g stroke="${ORO}" stroke-opacity=".55" stroke-width="1" fill="none">
+        <path d="M96 676 L1290 613"/><path d="M96 668 v16 M1290 605 v16"/>
+      </g>
+      ${etiqueta(700, 664, '244 MM', 'middle', 10.5, .85)}
+      ${llamada(612, 128, 470, 96, 'ACERO QUIRÚRGICO AISI 316L', 'end')}
+      ${llamada(1010, 166, 1110, 112, 'ACABADO ORO ROSA', 'start')}
+      ${llamada(522, 503, 470, 450, 'QR LÁSER · NFC NTAG 13.56 MHZ', 'end')}
+      ${etiqueta(W - 40, H - 34, 'HARDWARE PASIVO · SIN BATERÍAS', 'end', 10.5, .9)}
+      ${etiqueta(40, H - 34, 'SALVA BAND · SALVA WATCH', 'start', 10.5, .9)}
+      ` };
+    },
+    band() {
+      const W = 800, H = 600;
+      return { W, H, svg: `
+      ${fondo(W, H)}
+      <g transform="translate(400 290) rotate(-9) scale(0.82) translate(-1165 0)">${pulsera()}</g>
+      ${etiqueta(32, H - 30, 'SALVA BAND · SILICONA · QR + NFC', 'start', 11, .9)}
+      ` };
+    },
+    watch() {
+      const W = 800, H = 600;
+      return { W, H, svg: `
+      ${fondo(W, H)}
+      <g transform="translate(470 270) rotate(6)">${pasador(300, 210, 'rosa')}</g>
+      <g transform="translate(350 320) rotate(-5)">${pasador(380, 266, 'acero')}</g>
+      ${etiqueta(32, H - 30, 'SALVA WATCH · ACERO AISI 316L', 'start', 11, .9)}
+      ` };
+    }
+  };
+
+  function pintar() {
+    const nombre = (location.hash || '#compuesta').slice(1);
+    const v = (vistas[nombre] || vistas.compuesta)();
+    document.getElementById('escena').innerHTML =
+      `<svg xmlns="http://www.w3.org/2000/svg" width="${v.W}" height="${v.H}" viewBox="0 0 ${v.W} ${v.H}">${defs}${v.svg}</svg>`;
+  }
+  document.fonts.ready.then(pintar);
+  pintar();
+  window.addEventListener('hashchange', pintar);
+})();
+</script>
+</body>
+</html>
