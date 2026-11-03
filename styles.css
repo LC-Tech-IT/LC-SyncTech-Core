@@ -1173,7 +1173,8 @@ main, .pie { position: relative; z-index: 1; }
 }
 
 .identidad { display: grid; gap: 12px; }
-.identidad__texto { font-size: 1.0625rem; color: var(--texto) !important; opacity: 0.88; }
+.identidad__texto { font-size: 1.0625rem; color: var(--texto) !important; opacity: 0.9; line-height: 1.7; }
+.identidad__texto + .identidad__texto { margin-top: 14px; }
 .identidad__firma {
   display: grid;
   gap: 2px;
