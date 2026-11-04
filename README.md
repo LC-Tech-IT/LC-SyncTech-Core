@@ -44,7 +44,7 @@ LC-SyncTech/
   - Radar de convoy en tiempo real (alerta de escobero rezagado a > 500 m sin tocar WhatsApp).
   - Cockpit HUD táctico para guantes a 80 km/h con audio Bluetooth al casco.
   - Garaje Digital Anti-Patios con avisos preventivos de SOAT y Tecnomecánica (evita multas C35).
-- **Despliegue activo:** [biker-tracker.vercel.app](https://biker-tracker.vercel.app)
+- **Despliegue activo:** [biker.lcsynctech.com](https://biker.lcsynctech.com)
 
 ### 2. 🛡️ LC Salva
 - **Propósito:** Ecosistema integral de auxilio médico y salvaguarda que combina hardware pasivo con ficha médica en la nube y alerta silenciosa.
@@ -53,7 +53,7 @@ LC-SyncTech/
   - **Salva Watch:** Pasador de perfil ultra-delgado en acero quirúrgico AISI 316L deslizable en correas de smartwatches (Apple Watch, Garmin, Galaxy).
 - **Regla Ética Inquebrantable:** La ficha médica pública de emergencia es **100% gratuita de por vida** al adquirir cualquier pieza de hardware.
 - **Notificación:** Despacho de alerta SOS con geolocalización satelital a red multi-tutor vía Meta WhatsApp Cloud API.
-- **Despliegue activo:** [salva-salvaguarda.vercel.app](https://salva-salvaguarda.vercel.app)
+- **Despliegue activo:** [salva.lcsynctech.com](https://salva.lcsynctech.com)
 
 ---
 
