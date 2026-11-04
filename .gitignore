@@ -25,3 +25,7 @@ Thumbs.db
 desktop.ini
 *.tmp
 *.log
+
+# Archivos de video pesados (Cloudflare Pages limite 25MB)
+*.mp4
+*.mov
