@@ -2,12 +2,12 @@
 # LC SYNCTECH · CLOUDFLARE PAGES ROUTING & SECURITY RULES
 # ==============================================================================
 
-# 1. Bloqueo de seguridad: Evitar acceso público a código backend y artefactos internos
-/LC-SyncTech-Core/* / 404
-/.agents/* / 404
-/README.md / 404
-/.gitignore / 404
-/renders/* / 404
+# 1. Bloqueo y redirección segura: redirigir accesos a backend y artefactos a la raíz
+/LC-SyncTech-Core/* / 302
+/.agents/* / 302
+/README.md / 302
+/.gitignore / 302
+/renders/* / 302
 
 # 2. Enrutamiento canónico para secciones SPA
 /empresa /#empresa 302
