@@ -12,13 +12,13 @@ Este skill establece las directrices para que los productos de LC Tech no solo s
 
 ## 1. El Embudo de Crecimiento (Pirate Metrics - AARRR)
 
-Para cada producto (*Salva*, *Bike Tracker*, etc.), definir objetivos e instrumentar telemetría en las 5 etapas:
+Para cada producto (*Salva*, *LC Rider*, etc.), definir objetivos e instrumentar telemetría en las 5 etapas:
 
 1. **Adquisición (Acquisition):**
-   - ¿Cómo nos descubren los usuarios? (Canales orgánicos, alianzas con tiendas ciclistas, publicidad dirigida, boca a boca).
+   - ¿Cómo nos descubren los usuarios? (Canales orgánicos, alianzas con motoclubes, publicidad dirigida, boca a boca).
    - Métrica: Costo de Adquisición de Clientes (CAC), visitas web, descargas de app.
 2. **Activación (Activation):**
-   - El momento "¡Ajá!": el primer instante en que el usuario percibe el valor del producto (ej: primera alerta de pánico enviada en prueba en *Salva*, o primer recorrido registrado en *Bike Tracker*).
+   - El momento "¡Ajá!": el primer instante en que el usuario percibe el valor del producto (ej: primera alerta de pánico enviada en prueba en *Salva*, o primer recorrido registrado en convoy en *LC Rider*).
    - Métrica: Tasa de activación en los primeros 10 minutos post-instalación (% usuarios que completan onboarding).
 3. **Retención (Retention):**
    - El corazón de una compañía sólida. Sin retención, no hay crecimiento sostenible.
@@ -37,7 +37,7 @@ Para cada producto (*Salva*, *Bike Tracker*, etc.), definir objetivos e instrume
 Estructura trimestral para la alineación estratégica entre el CEO y el PM:
 
 - **Objetivo (O):** Inspiracional, cualitativo y enfocado en consolidar la presencia de LC Tech.
-  - *Ejemplo:* "Hacer de Bike Tracker la solución de seguridad y rastreo preferida por la comunidad ciclista urbana en nuestra fase de lanzamiento".
+  - *Ejemplo:* "Hacer de LC Rider la solución de telemetría y navegación en convoy preferida por la comunidad de motociclistas en nuestra fase de lanzamiento".
 - **Resultados Clave (KRs):** Cuantitativos, medibles y con fechas límite.
   - *KR 1:* Alcanzar 500 usuarios activos mensuales (MAU) en los primeros 60 días.
   - *KR 2:* Lograr una tasa de retención a 30 días superior al 40%.

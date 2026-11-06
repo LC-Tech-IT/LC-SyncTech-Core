@@ -1,6 +1,6 @@
 ---
 name: product-strategy-analyst
-description: Framework de estrategia de producto, validación de mercado, análisis competitivo, priorización metodológica (RICE, MoSCoW) y diseño de modelos de negocio para LC Tech y sus productos (Salva, Bike Tracker, Core).
+description: Framework de estrategia de producto, validación de mercado, análisis competitivo, priorización metodológica (RICE, MoSCoW) y diseño de modelos de negocio para LC Tech y sus productos (Salva, LC Rider, Core).
 ---
 
 # Product Strategy Analyst - LC Tech
@@ -32,10 +32,10 @@ Cada vez que el Fundador plantee un dilema de producto o pivote, este skill estr
 1. **Opciones Evaluadas (Opción A vs Opción B vs Opción C)**
 2. **Pros y Contras Técnicos y de Negocio**
 3. **Análisis de Riesgo y Deuda Técnica/Operativa**
-4. **Impacto en el Ecosistema LC Tech:** ¿Cómo afecta la integración entre *Salva*, *Bike Tracker* y *LC-Tech-Core*?
+4. **Impacto en el Ecosistema LC Tech:** ¿Cómo afecta la integración entre *Salva*, *LC Rider* y *LC-Tech-Core*?
 5. **Recomendación Ejecutiva Razonada:** Postura clara del PM respaldada por datos y argumentos de mercado.
 
 ### 4. Modelos de Monetización y Negocio
 - **B2C Freemium / Suscripción:** Planes gratuitos con cuotas de uso y planes Premium con funciones avanzadas (alertas en tiempo real, histórico de rutas, soporte prioritario).
-- **B2B / B2B2C Enterprise:** Venta de licencias o flotas para empresas de logística, aseguradoras, clubes ciclistas o entidades de seguridad.
+- **B2B / B2B2C Enterprise:** Venta de licencias o flotas para empresas de logística, aseguradoras, motoclubes o entidades de seguridad.
 - **Modelo Híbrido (Hardware + Software + Middleware):** Venta de dispositivo físico (GPS/telemetría) ligada a suscripción SaaS recurrente de plataforma y alertas.

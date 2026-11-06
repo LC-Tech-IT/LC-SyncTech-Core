@@ -37,14 +37,14 @@ LC-SyncTech/
 
 ## 🚀 Portafolio de Productos Propietarios
 
-### 1. 🏍️ Bike Tracker
+### 1. 🏍️ LC Rider
 - **Propósito:** Telemetría de alta disponibilidad (HA 99.9%), navegación y convoy en tiempo real para motociclistas.
 - **Lema:** *"Salimos juntos, rodamos juntos, volvemos todos juntos a casa."*
 - **Capacidades clave:**
   - Radar de convoy en tiempo real (alerta de escobero rezagado a > 500 m sin tocar WhatsApp).
   - Cockpit HUD táctico para guantes a 80 km/h con audio Bluetooth al casco.
   - Garaje Digital Anti-Patios con avisos preventivos de SOAT y Tecnomecánica (evita multas C35).
-- **Despliegue activo:** [biker.lcsynctech.com](https://biker.lcsynctech.com)
+- **Despliegue activo:** [rider.lcsynctech.com](https://rider.lcsynctech.com/)
 
 ### 2. 🛡️ LC Salva
 - **Propósito:** Ecosistema integral de auxilio médico y salvaguarda que combina hardware pasivo con ficha médica en la nube y alerta silenciosa.
@@ -53,7 +53,7 @@ LC-SyncTech/
   - **Salva Watch:** Pasador de perfil ultra-delgado en acero quirúrgico AISI 316L deslizable en correas de smartwatches (Apple Watch, Garmin, Galaxy).
 - **Regla Ética Inquebrantable:** La ficha médica pública de emergencia es **100% gratuita de por vida** al adquirir cualquier pieza de hardware.
 - **Notificación:** Despacho de alerta SOS con geolocalización satelital a red multi-tutor vía Meta WhatsApp Cloud API.
-- **Despliegue activo:** [salva.lcsynctech.com](https://salva.lcsynctech.com)
+- **Despliegue activo:** [salva.lcsynctech.com](https://salva.lcsynctech.com/)
 
 ---
 

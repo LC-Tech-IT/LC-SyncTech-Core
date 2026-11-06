@@ -18,4 +18,4 @@ description: Modelo operativo, roles y reglas de gobierno para LC Tech entre el 
 ## 2. Portafolio de Productos
 - **LC-Tech-Core:** El núcleo de la empresa (control hub, middleware, autenticación, modelo de negocio híbrido de desarrollo + middleware + outsourcing).
 - **Salva:** Solución de seguridad y asistencia.
-- **Bike Tracker:** Solución de micromovilidad, rastreo y telemetría para ciclistas.
+- **LC Rider:** Solución de telemetría, rastreo y navegación en convoy para motociclistas.

@@ -11,7 +11,7 @@ Este skill estandariza la creación de Documentos de Requerimientos de Producto 
 ---
 
 ## Cuándo Utilizar Este Skill
-- Al definir una nueva funcionalidad, módulo o producto completo (ej. *Salva*, *Bike Tracker*, *LC-Tech-Core*).
+- Al definir una nueva funcionalidad, módulo o producto completo (ej. *Salva*, *LC Rider*, *LC-Tech-Core*).
 - Al estructurar cambios arquitectónicos o rediseños de flujos críticos de usuario.
 - Antes de redactar cualquier prompt de desarrollo para Claude.
 

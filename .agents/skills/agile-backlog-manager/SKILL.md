@@ -15,8 +15,8 @@ Este skill organiza la ejecución ágil del portafolio de productos de LC Tech. 
 ```
 [Visión de Empresa LC Tech]
   └── [Iniciativa Estratégica] (ej: Plataforma Integral de Movilidad Segura)
-        └── [Epic] (ej: Módulo de Telemetría y Alertas en Tiempo Real de Bike Tracker)
-              └── [User Story] (ej: Como ciclista, quiero recibir una notificación si mi bici se mueve del punto de parqueo)
+        └── [Epic] (ej: Módulo de Telemetría y Alertas en Tiempo Real de LC Rider)
+              └── [User Story] (ej: Como motociclista en convoy, quiero recibir una alerta si el escobero se rezaga más de 500 m)
                     └── [Tareas Técnicas para Claude] (ej: Endpoint WebSocket, worker de verificación de geocerca, push notification trigger)
 ```
 
@@ -26,7 +26,7 @@ Este skill organiza la ejecución ágil del portafolio de productos de LC Tech. 
 
 ### Formato de Epic
 - **Título de la Epic:**
-- **Producto / Área:** (*Salva*, *Bike Tracker*, *LC-Tech-Core*)
+- **Producto / Área:** (*Salva*, *LC Rider*, *LC-Tech-Core*)
 - **Objetivo de Negocio:**
 - **Historias de Usuario Asociadas:**
 - **Dependencias Externas / Técnicas:** (ej. proveedor de SMS/WhatsApp, módulo GPS, servidor MQTT).
@@ -49,7 +49,7 @@ Toda historia debe cumplir los principios INVEST (*Independent, Negotiable, Valu
 En LC Tech existen componentes interconectados:
 - **LC-Tech-Core (Middleware / Backend Central):** Autenticación, facturación, servicios compartidos, gestión de clientes.
 - **Salva:** Aplicación de seguridad / asistencia.
-- **Bike Tracker:** Dispositivo físico / app de geolocalización ciclista.
+- **LC Rider:** App de telemetría y geolocalización en convoy para motociclistas.
 
 **Regla de Sincronización:**
 Ninguna historia de frontend o mobile debe enviarse a desarrollo en Claude sin que el contrato de API del Core correspondiente esté diseñado y aprobado por el PM y el CEO.
