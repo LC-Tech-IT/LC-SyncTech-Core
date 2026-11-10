@@ -81,12 +81,11 @@ Abrir en el navegador: `http://localhost:8080`
 ## 🔒 Privacidad y Marco Legal
 
 - **Razón Comercial:** LC SyncTech
-- **Titular / Propietario:** Lee Darwin Castro Varón (Persona Natural con Establecimiento de Comercio)
 - **NIT:** 1104695680-9
-- **Línea de Contacto / WhatsApp:** +57 320 450 2958
+- **Canal de Contacto:** [WhatsApp](https://wa.me/573204502958)
 - **Contacto Oficial:** contacto@lcsynctech.com
 - **Cumplimiento:** Ley 1581 de 2012 y Decreto 1377 de 2013 (Régimen de Protección de Datos Personales de la República de Colombia).
 
 ---
 
-© 2026 LC SyncTech · Lee Darwin Castro Varón · Todos los derechos reservados.
+© 2026 LC SyncTech · Todos los derechos reservados.
